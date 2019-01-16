@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import './Members.css';
+import './MembersContainer.css';
 
 import MemberCard from '../components/MemberCard';
 import MemberForm from './MemberForm';
@@ -19,6 +19,7 @@ class MembersContainer extends Component {
       <div className="members-container">
         <h1>Your Yearbook</h1>
         {this.props.members.map(member => <MemberCard key={member.id} member={member} />)}
+
         <MemberForm />
       </div>
     );
