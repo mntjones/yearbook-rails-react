@@ -1,0 +1,21 @@
+{
+  "name": "yearbook-rails-react",
+  "version": "1.0.0",
+  "description": " ",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib",
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {},
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mntjones/yearbook-rails-react/issues"
+  },
+  "homepage": "https://github.com/mntjones/yearbook-rails-react#readme"
+}

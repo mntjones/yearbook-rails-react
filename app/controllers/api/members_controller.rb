@@ -3,15 +3,16 @@ class Api::MembersController < ApplicationController
   before_action :findMember, only: [:show, :update, :destroy]
 
   def index 
-    render json: Member.all
+    @members = Member.all
+    render json: @members, status: 200
   end
 
   def create 
     member = Member.new(member_params)
     if member.save 
-      render json: member
+      render json: member, status:201
     else 
-      render json: { message: member.errors }, status: 400
+      error_response(member)
     end 
   end
 
