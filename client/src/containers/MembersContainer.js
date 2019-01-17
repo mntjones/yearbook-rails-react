@@ -1,25 +1,23 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import './MembersContainer.css';
-
-import MemberCard from '../components/MemberCard';
 import MemberForm from './MemberForm';
-
+import Members from '../components/Members';
 import { getMembers } from '../actions/MembersActions';
-
+import './MembersContainer.css';
 
 class MembersContainer extends Component {
 
- componentDidMount() {
-   this.props.getMembers()
+  componentDidMount() {
+    this.props.getMembers();
   }
   
   render() {
-    return (
-      <div className="members-container">
-        <h1>Your Yearbook</h1>
-        {this.props.members.map(member => <MemberCard key={member.id} member={member} />)}
+    console.log("Members Props:", this.props)
 
+    return (
+      <div className="work">
+        <Members 
+        />
         <MemberForm />
       </div>
     );
@@ -27,9 +25,7 @@ class MembersContainer extends Component {
 }
 
 const mapStateToProps = (state) => {
-  return ({
-    members: state.members
-  })
+  return ({ members: state.members })
 }
 
  export default connect(mapStateToProps, { getMembers })(MembersContainer);

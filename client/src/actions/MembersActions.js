@@ -1,13 +1,24 @@
 import { resetMemberForm } from './MemberFormActions';
 
-const API_URL = process.env.REACT_APP_API_URL;
-
 // ** Action Creators **
+
+const loadMembers = () => {
+    return {
+        type: 'MAKE_MEMBERS_REQUEST'
+    }
+}
+
 const setMembers = members => {
   return {
     type: 'GET_MEMBERS_SUCCESS',
     members
   }
+}
+
+const postRequest = () => {
+    return {
+        type: 'MAKE_POST_REQUEST'
+    }
 }
 
 const addMember = member => {
@@ -19,17 +30,19 @@ const addMember = member => {
 
 // ** Async Actions **
 export const getMembers = () => {
-  return dispatch => {
-    return fetch(`${API_URL}/members`)
-      .then(response => response.json())
-      .then(members => dispatch(setMembers(members)))
-      .catch(error => console.log(error));
-  }
+    return dispatch => {
+        dispatch(loadMembers())
+        return fetch('http://localhost:3000/api/v1/members')
+        .then(response => response.json())
+        .then(members => dispatch(setMembers(members)))
+        .catch(error => console.log(error))
+    }
 }
 
 export const createMember = member => {
   return dispatch => {
-    return fetch(`${API_URL}/members`, {
+    dispatch(postRequest())
+    return fetch('http://localhost:3001/api/members', {
       method: "POST",
       headers: {
         'Content-Type': 'application/json'

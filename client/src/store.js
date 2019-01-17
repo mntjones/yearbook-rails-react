@@ -1,16 +1,18 @@
-import { createStore, applyMiddleware, combineReducers } from 'redux';
+import { createStore, applyMiddleware, combineReducers, compose } from 'redux';
 import thunk from 'redux-thunk';
 
 import MembersReducer from './reducers/MembersReducer';
-import MemberFormData from './reducers/MemberFormData';
+import MemberFormDataReducer from './reducers/MemberFormDataReducer';
 
-const reducers = combineReducers({ MembersReducer, MemberFormData });
+
+
+
+const reducers = combineReducers({ MembersReducer, MemberFormDataReducer });
 const middleware = [thunk];
 
-
+const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 export default createStore(
   reducers,
-  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
-  applyMiddleware(...middleware),
+  composeEnhancer(applyMiddleware(...middleware))
 );

@@ -26,7 +26,6 @@ class MemberForm extends Component {
       <div>
         Add A Member To Your Yearbook
 
-        // Form Data
         <form onSubmit={this.handleOnSubmit}>
           <div>
             <label htmlFor="name">Name:</label>
