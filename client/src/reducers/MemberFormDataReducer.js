@@ -1,6 +1,6 @@
 const initialState = {
   name: '', 
-  age: 0, 
+  age: '', 
   img_url: '', 
   motto: ''
 }

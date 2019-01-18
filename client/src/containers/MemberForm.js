@@ -1,18 +1,30 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-// import { updateMemberFormData } from '../actions/MemberFormActions';
-// import { createMember } from '../actions/MembersActions';
+import { updateMemberFormData } from '../actions/MemberFormActions';
+import { createMember } from '../actions/MembersActions';
 
 class MemberForm extends Component {
 
+	handleOnChange = event => {
+    const { name, value } = event.target;
+    const currentFormData = Object.assign({}, this.props.MemberFormDataReducer, {
+      [name]: value
+    })
+    this.props.updateMemberFormData(currentFormData)
+  }
+
+  handleOnSubmit = event => {
+    event.preventDefault()
+    this.props.createMember(this.props.MemberFormDataReducer)
+  }
 
   render() {
 
     const { name, age, img_url, motto } = this.props.MemberFormDataReducer;
 
     return (
-      <div>
+      <div className="form">
         Add A Person to your Yearbook
         <form onSubmit={this.handleOnSubmit}>
           <div>
@@ -45,7 +57,7 @@ class MemberForm extends Component {
           <div>
             <label htmlFor="motto">Personal motto:</label>
             <input 
-              type="number"
+              type="text"
               onChange={this.handleOnChange}
               name="motto"
               value={motto}
@@ -63,4 +75,4 @@ const mapStateToProps = state => {
   return { MemberFormDataReducer: state.MemberFormDataReducer }
 }
 
-export default connect(mapStateToProps)(MemberForm);
+export default connect(mapStateToProps, {updateMemberFormData, createMember})(MemberForm);

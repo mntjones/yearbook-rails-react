@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 //import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import './App.css';
-import { getMembers } from '../actions/MembersActions'
+
 import MembersContainer from './MembersContainer'
 // import Home from './Home';
 // import Comments from './Comments';

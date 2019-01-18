@@ -16,10 +16,8 @@ class MembersContainer extends Component {
     return(
       <div className="members-container">
         <div className="App-header"><h1>Yearbook Members</h1></div>
-  
-        {this.props.members.map(member => <MemberCard key={member.id} member={member} /> )}
-
         <MemberForm />
+        {this.props.members.map(member => <MemberCard key={member.id} member={member} /> )}
       </div>
     );
   } 
