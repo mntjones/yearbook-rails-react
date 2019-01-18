@@ -1,6 +1,6 @@
 class Api::MembersController < ApplicationController 
 
-  before_action :findMember, only: [:show, :update, :destroy]
+  before_action :find_member, only: [:show, :update, :destroy]
 
   def index 
     @members = Member.all
@@ -12,7 +12,7 @@ class Api::MembersController < ApplicationController
     if member.save 
       render json: member, status:201
     else 
-      error_response(member)
+      render json: { message: member.errors }, status: 400
     end 
   end
 
@@ -38,8 +38,8 @@ class Api::MembersController < ApplicationController
 
   private 
 
-    def findMember
-      @member = member.find_by(id: params[:id])
+    def find_member
+      @member = Member.find_by(id: params[:id])
     end
 
     def member_params

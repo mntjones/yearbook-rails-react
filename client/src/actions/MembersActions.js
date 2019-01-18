@@ -32,7 +32,7 @@ const addMember = member => {
 export const getMembers = () => {
     return dispatch => {
         dispatch(loadMembers())
-        return fetch('http://localhost:3000/api/v1/members')
+        return fetch('http://localhost:3000/api/members')
         .then(response => response.json())
         .then(members => dispatch(setMembers(members)))
         .catch(error => console.log(error))
@@ -42,7 +42,7 @@ export const getMembers = () => {
 export const createMember = member => {
   return dispatch => {
     dispatch(postRequest())
-    return fetch('http://localhost:3001/api/members', {
+    return fetch('http://localhost:3000/api/members', {
       method: "POST",
       headers: {
         'Content-Type': 'application/json'
