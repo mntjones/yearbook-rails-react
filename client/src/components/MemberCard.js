@@ -1,12 +1,15 @@
 import React from 'react';
 
-const MemberCard = (props) => (
-  <div key={props.member.id} className="MemberCard">
-    <h3>Name: {props.member.name}</h3>
-    <p>Age: {props.member.age} years</p>
-    <img className="image" src={props.member.img_url} alt={props.member.name} />
-    <p>Personal Motto: {props.member.motto} </p>
-  </div>
-)
-
+const MemberCard = ({ member }) => {
+  console.log("These are the MemberCard props:", member)
+  return(
+    <div key={member.id} className='member-card'>
+      <h3>{member.name}</h3>
+      <h4>{member.age} years</h4>
+      <h4>Motto: {member.motto}</h4>
+      <img className="member-image" src={member.img_url} alt={member.name} />
+    </div>
+  )
+}
+        
 export default MemberCard;

@@ -1,31 +1,19 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { updateMemberFormData } from '../actions/MemberFormActions';
-import { createMember } from '../actions/MembersActions';
+// import { updateMemberFormData } from '../actions/MemberFormActions';
+// import { createMember } from '../actions/MembersActions';
 
 class MemberForm extends Component {
 
-  handleOnChange = event => {
-    const { name, value } = event.target;
-    const currentMemberFormData = Object.assign({}, this.props.MemberFormData, {
-      [name]: value
-    })
-    this.props.updateMemberFormData(currentMemberFormData)
-  }
-
-  handleOnSubmit = event => {
-    event.preventDefault()
-    this.props.createMember(this.props.MemberFormData)
-  }
 
   render() {
-    const { name, age, img_url, motto } = this.props.MemberFormData;
+
+    const { name, age, img_url, motto } = this.props.MemberFormDataReducer;
 
     return (
       <div>
-        Add A Member To Your Yearbook
-
+        Add A Person to your Yearbook
         <form onSubmit={this.handleOnSubmit}>
           <div>
             <label htmlFor="name">Name:</label>
@@ -55,16 +43,16 @@ class MemberForm extends Component {
             />
           </div>
           <div>
-            <label htmlFor="motto">Personal Motto:</label>
+            <label htmlFor="motto">Personal motto:</label>
             <input 
-              type="text"
+              type="number"
               onChange={this.handleOnChange}
               name="motto"
               value={motto}
             />
           </div>
 
-          <button type="submit">Add Member</button>
+          <button type="submit">Add Person</button>
         </form>
       </div>
     )
@@ -72,12 +60,7 @@ class MemberForm extends Component {
 }
 
 const mapStateToProps = state => {
-  return {
-    MemberFormData: state.MemberFormData
-  }
+  return { MemberFormDataReducer: state.MemberFormDataReducer }
 }
 
-export default connect(mapStateToProps, { 
-  updateMemberFormData,
-  createMember
-})(MemberForm);
+export default connect(mapStateToProps)(MemberForm);

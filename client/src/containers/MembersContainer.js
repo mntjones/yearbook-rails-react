@@ -1,30 +1,36 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import { connect } from 'react-redux';
-//import MemberForm from './MemberForm';
-import Members from '../components/Members';
+import MemberForm from './MemberForm';
+import MemberCard from '../components/MemberCard';
 import { getMembers } from '../actions/MembersActions';
 import './MembersContainer.css';
 
 class MembersContainer extends Component {
 
   componentDidMount() {
-    this.props.getMembers();
+    this.props.getMembers()
   }
-  
+
   render() {
-    console.log("Members Props:", this.props)
 
-    return (
-      <div className="work">
-        <Members/>
+    return(
+      <div className="members-container">
+        <div className="App-header"><h1>Yearbook Members</h1></div>
+  
+        {this.props.members.map(member => <MemberCard key={member.id} member={member} /> )}
 
+        <MemberForm />
       </div>
     );
-  }
+  } 
 }
 
 const mapStateToProps = (state) => {
-  return ({ members: state.members })
+  return ({
+    members: state.members
+  })
 }
 
- export default connect(mapStateToProps, { getMembers })(MembersContainer);
+export default connect(mapStateToProps, { getMembers })(MembersContainer);
+
+
