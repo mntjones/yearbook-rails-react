@@ -20,6 +20,13 @@ const addMember = member => {
   }
 } 
 
+const deleteMember = id => {
+  return {
+    type: 'DELETE_MEMBER',
+    id
+  }
+}
+
 // ** Async Actions **
 export const getMembers = () => {
     return (dispatch => {
@@ -46,4 +53,19 @@ export const createMember= member => {
       })
       .catch(error => console.log(error))
   }
+}
+
+export const destroyMember = id => {
+    return dispatch => {
+        return fetch(`${API_URL}/members/${id}`, {
+          method: 'DELETE',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+        })
+        .then(response => {
+            dispatch(deleteMember(id))
+        })
+        .catch(error => console.log(error))
+    }
 }

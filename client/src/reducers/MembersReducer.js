@@ -1,12 +1,16 @@
-export default (state = [], action) => {
+export default (state = {members:[]}, action) => {
   switch(action.type) {
   	
     case 'GET_MEMBERS_SUCCESS':
-      return action.members;
+      return { ...state, members: action.members };
 
     case 'CREATE_MEMBER_SUCCESS':
-      return state.concat(action.member);
+      return { ...state, members: [ ...state.members, action.member ] };
 
+    case 'DELETE_MEMBER':
+
+      return { ...state, members: state.members.filter(member => member.id !== action.id) };
+    
     default: 
       return state;
   }

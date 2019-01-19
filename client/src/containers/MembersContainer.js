@@ -1,9 +1,10 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import MemberForm from './MemberForm';
-import MemberCard from '../components/MemberCard';
-import { getMembers } from '../actions/MembersActions';
+import Member from '../components/Member';
+import { getMembers, destroyMember } from '../actions/MembersActions';
 import './MembersContainer.css';
+
 
 class MembersContainer extends Component {
 
@@ -12,12 +13,12 @@ class MembersContainer extends Component {
   }
 
   render() {
-
     return(
       <div className="members-container">
         <div className="App-header"><h1>Yearbook Members</h1></div>
         <MemberForm />
-        {this.props.members.map(member => <MemberCard key={member.id} member={member} /> )}
+        {this.props.members.map(member => <Member key={member.id} member={member} destroyMember={this.props.destroyMember} /> )}
+        <div>{this.props.children}</div>
       </div>
     );
   } 
@@ -25,10 +26,9 @@ class MembersContainer extends Component {
 
 const mapStateToProps = (state) => {
   return ({
-    members: state.members
+    members: state.members.members,
+    MemberFormData: state.MemberFormData
   })
 }
 
-export default connect(mapStateToProps, { getMembers })(MembersContainer);
-
-
+export default connect(mapStateToProps, { getMembers, destroyMember })(MembersContainer);
