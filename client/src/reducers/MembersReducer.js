@@ -18,7 +18,7 @@ export default (state = {members:[]}, action) => {
         }
         else return member
       })
-
+      
       return {...state, members: updated }
     
     default: 
