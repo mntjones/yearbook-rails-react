@@ -25,7 +25,7 @@ class MemberForm extends Component {
 
     return (
       <div className="form">
-        Add A Person to your Yearbook
+        <h2>Add A Person to your Yearbook</h2>
         <form onSubmit={this.handleOnSubmit}>
           <div>
             <label htmlFor="name">Name:</label>
@@ -63,8 +63,8 @@ class MemberForm extends Component {
               value={motto}
             />
           </div>
-
           <button type="submit">Add Person</button>
+
         </form>
       </div>
     )

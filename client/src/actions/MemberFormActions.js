@@ -11,3 +11,10 @@ export const resetMemberForm = () => {
     type: 'RESET_MEMBER_FORM'
   }
 }
+
+export const prePopulate = data => {
+    return {
+        type: 'PRE_POPULATE',
+        payload: data
+    }
+}

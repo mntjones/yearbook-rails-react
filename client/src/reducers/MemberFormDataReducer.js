@@ -2,7 +2,8 @@ const initialState = {
   name: '', 
   age: '', 
   img_url: '', 
-  motto: ''
+  motto: '',
+  prefill: {}
 }
 
 export default (state = initialState, action) => {
@@ -13,6 +14,9 @@ export default (state = initialState, action) => {
 
     case 'RESET_MEMBER_FORM':
       return initialState;
+
+     case 'PRE_POPULATE':
+      return { ...state, prefill: action.payload }
     
     default: 
       return state;

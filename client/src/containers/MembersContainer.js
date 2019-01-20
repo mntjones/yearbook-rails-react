@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import MemberForm from './MemberForm';
 import Member from '../components/Member';
 import { getMembers, destroyMember } from '../actions/MembersActions';
+import { prePopulate } from '../actions/MemberFormActions';
 import './MembersContainer.css';
 
 
@@ -17,7 +18,7 @@ class MembersContainer extends Component {
       <div className="members-container">
         <div className="App-header"><h1>Yearbook Members</h1></div>
         <MemberForm />
-        {this.props.members.map(member => <Member key={member.id} member={member} destroyMember={this.props.destroyMember} /> )}
+        {this.props.members.map(member => <Member key={member.id} member={member} destroyMember={this.props.destroyMember} prePopulate={ this.props.prePopulate }/> )}
         <div>{this.props.children}</div>
       </div>
     );
@@ -31,4 +32,4 @@ const mapStateToProps = (state) => {
   })
 }
 
-export default connect(mapStateToProps, { getMembers, destroyMember })(MembersContainer);
+export default connect(mapStateToProps, { getMembers, destroyMember, prePopulate })(MembersContainer);

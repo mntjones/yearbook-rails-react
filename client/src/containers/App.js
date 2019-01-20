@@ -6,6 +6,7 @@ import MembersContainer from './MembersContainer'
 import Home from './Home';
 import Comments from './Comments';
 import Navbar from './Navbar';
+import MemberFormEdit from './MemberFormEdit';
 
 
 class App extends Component {
@@ -22,6 +23,7 @@ class App extends Component {
               <Route exact path='/members' component={MembersContainer}/>
               <Route exact path='/members/:id' component={Member} />
               <Route path='/comments' component={Comments}/>
+              <Route path='/members/:id/edit' component={MemberFormEdit}/>
             </Switch>
           </div>
         </Router>

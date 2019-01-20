@@ -22,5 +22,32 @@
 .form {
   background-color: white;
   width: 100%;
-  align-self: center;
+  float: left;
+}
+
+.form label{
+    display: inline-block;
+    float: center;
+    clear: left;
+    width: 150px;
+    text-align: left;
+}
+.form input {
+  display: inline-block;
+  float: center;
+  width: 150px;
+}
+
+button {
+  display: inline-block;
+  float: center;
+  height: 30px;
+  width: 100px;
+  font-size: 14px;
+  margin: 20px;
+  color: black;
+}
+
+.link {
+  color: black;
 }

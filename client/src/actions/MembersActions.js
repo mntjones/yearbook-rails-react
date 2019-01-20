@@ -27,14 +27,20 @@ const deleteMember = id => {
   }
 }
 
+const editMember = member => {
+  return {
+    type: 'UPDATE_MEMBER',
+    member
+  }
+}
 // ** Async Actions **
 export const getMembers = () => {
-    return (dispatch => {
-      return fetch(`${API_URL}/members`)
-      .then(response => response.json())
-      .then(members => dispatch(setMembers(members)))
-      .catch(error => console.log(error))
-    })
+  return (dispatch => {
+    return fetch(`${API_URL}/members`)
+    .then(response => response.json())
+    .then(members => dispatch(setMembers(members)))
+    .catch(error => console.log(error))
+  })
 }
 
 export const createMember= member => {
@@ -56,16 +62,34 @@ export const createMember= member => {
 }
 
 export const destroyMember = id => {
-    return dispatch => {
-        return fetch(`${API_URL}/members/${id}`, {
-          method: 'DELETE',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-        })
-        .then(response => {
-            dispatch(deleteMember(id))
-        })
-        .catch(error => console.log(error))
-    }
+  return dispatch => {
+    return fetch(`${API_URL}/members/${id}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+    })
+    .then(response => {
+        dispatch(deleteMember(id))
+    })
+    .catch(error => console.log(error))
+  }
+}
+
+export const updateMember = (id, member) => {
+  return dispatch => {
+    return fetch(`${API_URL}/members/${id}`,{
+        method: 'PATCH',
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({member: member})
+    })
+    .then(response => response.json())
+    .then(member => {
+        dispatch(editMember(member))
+        dispatch(resetMemberForm())
+    })
+    .catch(error => console.log(error))
+  }
 }
