@@ -1,3 +1,4 @@
+// ** Action Creators **
 
 export const updateMemberFormData = MemberFormDataReducer => {
   return {
@@ -13,8 +14,8 @@ export const resetMemberForm = () => {
 }
 
 export const prePopulate = data => {
-    return {
-        type: 'PRE_POPULATE',
-        payload: data
-    }
+  return {
+    type: 'PRE_POPULATE',
+    payload: data
+  }
 }

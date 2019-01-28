@@ -2,7 +2,7 @@ import { resetMemberForm } from './MemberFormActions';
 
 const API_URL = process.env.REACT_APP_API_URL;
 
-// ** Action Creators **
+// ** Action Creators **//
 
 
 const setMembers = members => {
@@ -11,7 +11,6 @@ const setMembers = members => {
     members
   }
 }
-
 
 const addMember = member => {
   return {
@@ -33,7 +32,10 @@ const editMember = member => {
     member
   }
 }
-// ** Async Actions **
+
+
+// ** Async Actions **//
+
 export const getMembers = () => {
   return (dispatch => {
     return fetch(`${API_URL}/members`)
@@ -52,12 +54,12 @@ export const createMember= member => {
       },
       body: JSON.stringify({ member: member })
     })
-      .then(response => response.json())
-      .then(member => {
-        dispatch(addMember(member))
-        dispatch(resetMemberForm())
-      })
-      .catch(error => console.log(error))
+    .then(response => response.json())
+    .then(member => {
+      dispatch(addMember(member))
+      dispatch(resetMemberForm())
+    })
+    .catch(error => console.log(error))
   }
 }
 

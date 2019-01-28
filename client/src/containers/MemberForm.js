@@ -6,6 +6,7 @@ import { createMember } from '../actions/MembersActions';
 
 class MemberForm extends Component {
 
+// updates as form is being filled in
 	handleOnChange = event => {
     const { name, value } = event.target;
     const currentFormData = Object.assign({}, this.props.MemberFormDataReducer, {
@@ -14,6 +15,7 @@ class MemberForm extends Component {
     this.props.updateMemberFormData(currentFormData)
   }
 
+// creates new member on submit button
   handleOnSubmit = event => {
     event.preventDefault()
     this.props.createMember(this.props.MemberFormDataReducer)

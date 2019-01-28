@@ -20,6 +20,8 @@ export default (state = {members:[]}, action) => {
       })
       
       return {...state, members: updated }
+
+
     
     default: 
       return state;
