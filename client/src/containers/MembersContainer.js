@@ -9,9 +9,20 @@ import './MembersContainer.css';
 
 class MembersContainer extends Component {
 
+
+ constructor(props) {
+  super(props)
+
+  this.state={
+    members: this.props.members
+  }
+ }
+
   componentDidMount() {
     this.props.getMembers()
   }
+
+
 
   render() {
     return(
@@ -19,8 +30,9 @@ class MembersContainer extends Component {
         <div className="App-header"><h1>Yearbook Members</h1></div>
         <MemberForm />
         {this.props.members.map(member => <Member key={member.id} member={member} destroyMember={this.props.destroyMember} 
-          prePopulate={ this.props.prePopulate }
-          /> )}
+          prePopulate={ this.props.prePopulate } 
+          />)}
+
         <div>{this.props.children}</div>
       </div>
     );

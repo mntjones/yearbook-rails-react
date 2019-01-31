@@ -43,7 +43,7 @@ class Api::MembersController < ApplicationController
     end
 
     def member_params
-      params.require(:member).permit(:name, :age, :img_url, :motto)
+      params.require(:member).permit(:name, :age, :img_url, :motto, :likes)
     end
 
 end

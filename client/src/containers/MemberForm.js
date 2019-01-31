@@ -18,7 +18,9 @@ class MemberForm extends Component {
 // creates new member on submit button
   handleOnSubmit = event => {
     event.preventDefault()
+    console.log('A')
     this.props.createMember(this.props.MemberFormDataReducer)
+    console.log('B')
   }
 
   render() {

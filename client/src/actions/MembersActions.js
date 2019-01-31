@@ -34,6 +34,7 @@ const editMember = member => {
 }
 
 
+
 // ** Async Actions **//
 
 export const getMembers = () => {
@@ -46,6 +47,7 @@ export const getMembers = () => {
 }
 
 export const createMember= member => {
+  console.log('C')
   return dispatch => {
     return fetch(`${API_URL}/members`, {
       method: "POST",
@@ -56,11 +58,13 @@ export const createMember= member => {
     })
     .then(response => response.json())
     .then(member => {
+      console.log('D')
       dispatch(addMember(member))
       dispatch(resetMemberForm())
     })
     .catch(error => console.log(error))
   }
+  console.log("E")
 }
 
 export const destroyMember = id => {
