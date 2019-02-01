@@ -1,19 +1,19 @@
 import React, {Component} from 'react'
 import { Link } from 'react-router-dom';
-import Like from './Like';
+//import Like from './Like';
  
 class Member extends Component {
 
   constructor(props) {
     super(props)
     this.state = {
-      member: this.props.member
+      likes: this.props.member.likes
     }
 
   }
 
-  handleLikes() {
-
+  handleLikes =() =>{
+    this.setState(prevLikes => ({likes: prevLikes.likes + 1}));
 
   }
 
@@ -34,7 +34,7 @@ class Member extends Component {
           </button>
           
           <button onClick={() => this.handleLikes()}> LIKE </button>
-          
+          <p className="likes">Likes: { this.state.likes }</p>
         </div>
       </div>
     )
