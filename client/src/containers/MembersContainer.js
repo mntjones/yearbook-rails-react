@@ -16,13 +16,45 @@ class MembersContainer extends Component {
   this.state={
     members: this.props.members
   }
+  this.handleUpdate = this.handleUpdate.bind(this)
+  this.updateMember = this.updateMember.bind(this)
  }
 
   componentDidMount() {
     this.props.getMembers()
+    
   }
 
 
+  handleUpdate(member){
+    console.log("fetch starts")
+    fetch(`http://localhost:3000/api/members/${member.id}`, 
+    {
+      method: 'PUT',
+      body: JSON.stringify({member: member}),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    }).then((response) => { 
+        this.updateMember(member)
+        console.log(member)
+      })
+  }
+
+  updateMember(member){
+
+      let updatedMember = this.props.members.filter((m) => m.id !== member.id)
+      this.setState({
+        members: {...this.props.members, updatedMember}
+      })
+      console.log("update member")
+
+      // this fixes Async problem, but not strictly React (this is a Redux method)
+      // and it refetches all members again, so not data friendly
+
+      this.props.getMembers()
+
+    }
 
   render() {
     return(
@@ -30,7 +62,7 @@ class MembersContainer extends Component {
         <div className="App-header"><h1>Yearbook Members</h1></div>
         <MemberForm />
         {this.props.members.map(member => <Member key={member.id} member={member} destroyMember={this.props.destroyMember} 
-          prePopulate={ this.props.prePopulate } 
+          prePopulate={ this.props.prePopulate } handleUpdate = {this.handleUpdate} updateMember={this.updateMember}
           />)}
 
         <div>{this.props.children}</div>

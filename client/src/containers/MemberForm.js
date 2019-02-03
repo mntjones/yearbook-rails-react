@@ -67,7 +67,7 @@ class MemberForm extends Component {
               value={motto}
             />
           </div>
-          <button type="submit">Add Person</button>
+          <button type="submit" className="form-button">Add Person</button>
 
         </form>
       </div>

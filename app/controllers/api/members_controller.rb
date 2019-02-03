@@ -1,3 +1,5 @@
+require 'pry'
+
 class Api::MembersController < ApplicationController 
 
   before_action :find_member, only: [:show, :update, :destroy]

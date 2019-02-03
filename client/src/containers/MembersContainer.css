@@ -19,7 +19,7 @@
 
 .member-image {
   width: 50%;
-  height:50%;
+  height:30%;
 }
 
 .form {
@@ -40,8 +40,7 @@
   float: center;
   width: 150px;
 }
-
-button {
+.form-button {
   display: inline-block;
   float: center;
   height: 30px;
@@ -50,6 +49,16 @@ button {
   margin: 20px;
   color: black;
 }
+.member-button {
+  display: block;
+  float: left;
+  height: 30px;
+  width: 80px;
+  font-size: 14px;
+  margin: 20px;
+  color: black;
+}
+
 
 .link {
   color: black;
@@ -57,6 +66,6 @@ button {
 
 .likes {
   padding: 0 20px 0 0;
-  float: right;
-
+  float: center;
+  display: inline-block;
 }
