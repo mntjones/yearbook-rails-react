@@ -14,11 +14,11 @@ class Member extends Component {
 
   // order of things happening on Likes:
   // button click -> handleLikes (below) called
-  // handleUpdate fires -> "fetch starts"
+  // handleUpdate fires -> put "fetch starts"
   // handleLikes setState fires -> console.log (this.state.likes)
   // updateMember fires (updating member))
-  // member info with new like data
-  // fetch finishes 
+  // second then in handleUpdate fires -> member info with new like data
+  // put fetch finishes 
 
   // Problem - when I navigate away from page, likes # revertes to old number
   // when I refresh page, new number appears
@@ -27,6 +27,8 @@ class Member extends Component {
   handleLikes = () => {
     // this line updates the component with number of likes (no persistence)
     //this.setState(prevLikes => ({likes: prevLikes.likes + 1}));
+
+    // this is for persistence, uses callback to handle member update 
     this.setState({
       likes: this.state.likes + 1}, () => {
         let member = {id: this.props.member.id, name: this.props.member.name, 

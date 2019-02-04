@@ -17,7 +17,7 @@ class MembersContainer extends Component {
     members: this.props.members
   }
   this.handleUpdate = this.handleUpdate.bind(this)
-  this.updateMember = this.updateMember.bind(this)
+
  }
 
   componentDidMount() {
@@ -25,9 +25,10 @@ class MembersContainer extends Component {
     
   }
 
-
   handleUpdate(member){
     console.log("fetch starts")
+
+    console.log(member)
     fetch(`http://localhost:3000/api/members/${member.id}`, 
     {
       method: 'PUT',
@@ -35,26 +36,26 @@ class MembersContainer extends Component {
       headers: {
         'Content-Type': 'application/json'
       }
-    }).then((response) => { 
-        this.updateMember(member)
-        console.log(member)
-      })
+    })
+    .then((response) => response.json())
+    .then((member) => { 
+        console.log("updating")
+
+        this.setState(state => {
+          const members = state.members.filter((m) => m.id !== member.id);
+          state.members.concat(member);
+          return { members, }
+        })
+      }
+    )
   }
 
-  updateMember(member){
 
-      let updatedMember = this.props.members.filter((m) => m.id !== member.id)
-      this.setState({
-        members: {...this.props.members, updatedMember}
-      })
-      console.log("update member")
+  //     // this fixes Async problem, but not strictly React (this is a Redux method)
+  //     // and it refetches all members again, so not data friendly
 
-      // this fixes Async problem, but not strictly React (this is a Redux method)
-      // and it refetches all members again, so not data friendly
+  //     //this.props.getMembers()
 
-      this.props.getMembers()
-
-    }
 
   render() {
     return(
