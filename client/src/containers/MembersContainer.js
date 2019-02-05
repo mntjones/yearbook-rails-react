@@ -50,20 +50,23 @@ class MembersContainer extends Component {
     )
   }
 
-
-  //     // this fixes Async problem, but not strictly React (this is a Redux method)
-  //     // and it refetches all members again, so not data friendly
-
-  //     //this.props.getMembers()
-
-
+  
   render() {
+
+  this.handleSort = () => {
+      const members = [...this.props.members].sort(function(a,b) {return b.likes-a.likes})
+      console.log(members)
+      return members
+    }
+
     return(
       <div className="members-container">
         <div className="App-header"><h1>Yearbook Members</h1></div>
         <MemberForm />
+        <button className="form-button" onClick={this.handleSort}>Sort by Likes</button>
+
         {this.props.members.map(member => <Member key={member.id} member={member} destroyMember={this.props.destroyMember} 
-          prePopulate={ this.props.prePopulate } handleUpdate = {this.handleUpdate} updateMember={this.updateMember}
+          prePopulate={ this.props.prePopulate } handleUpdate = {this.handleUpdate} handleSort={this.handleSort}
           />)}
 
         <div>{this.props.children}</div>
