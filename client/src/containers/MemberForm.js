@@ -70,8 +70,6 @@ class MemberForm extends Component {
           </div>
           <button type="submit" className="form-button">Add Person</button>
 
-          
-
         </form>
       </div>
     )

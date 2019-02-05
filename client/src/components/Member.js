@@ -13,16 +13,10 @@ class Member extends Component {
   handleLikes = () => {
     this.setState({
       likes: this.state.likes + 1}, () => {
-        let member = {id: this.props.member.id, name: this.props.member.name, 
-          age: this.props.member.age, img_url: this.props.member.img_url, likes: this.state.likes}
- //{...this.props.member, likes: }
+        let member = {...this.props.member, likes: this.state.likes}
         this.props.handleUpdate(member)
-        console.log(this.state.likes)}
-    )
+    })
   }
-
-  
-
 
   render () {
 
