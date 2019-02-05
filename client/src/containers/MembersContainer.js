@@ -7,7 +7,7 @@ import { prePopulate } from '../actions/MemberFormActions';
 import './MembersContainer.css';
 
 
-// added variable to keep track of sorting state
+// added variable to keep track of sorting state, want these available immediately
 let listMembers = [];
 let sort = false
 
