@@ -7,10 +7,6 @@ import { prePopulate } from '../actions/MemberFormActions';
 import './MembersContainer.css';
 
 
-// added variable to keep track of sorting state, want these available immediately
-let listMembers = [];
-let sort = false
-
 class MembersContainer extends Component {
 
 
@@ -20,11 +16,15 @@ class MembersContainer extends Component {
   this.state={
     members: []
   }
+  // added memberArray variable
+  this.memberArray = [...this.props.members]
   this.handleUpdate = this.handleUpdate.bind(this)
+
  }
 
   componentDidMount() {
     this.props.getMembers()
+
   }
 
   handleUpdate(member){
@@ -50,51 +50,45 @@ class MembersContainer extends Component {
 
   
   render() {
+    // local variables to hold state
+    let sort = false;
 
-// handle my sort on button click
-// create a new array and use the sort method on it - sorted array in members variable
+
+    // initialize method to make sure that memberArray from constructor is not empty
+    this.initialize = () => {
+      if (this.memberArray.length === 0) {
+        return this.memberArray = [...this.props.members]
+      }
+    }
+
+  // handle my sort on button click
     this.handleSort = () => {
+      //updating my  sort variable to true
+      sort = true;
+
+      // create a new array and use the sort method on it - sorted array in members variable
       const members = [...this.props.members].sort(function(a,b) {return b.likes-a.likes})
-      
-      // assigning my global variable the sorted members array
-      listMembers = members;
-      //updating my globale sort variable to true
-      sort = true
-      //updating state
-      this.setState({members: listMembers}, () => {console.log(listMembers)})
-      //returning my global variable with the sorted list of members
-      return listMembers
 
+      // assigning my local variable the sorted members array which is used as a holder for the setArray method
+      this.memberArray = members
+      //setState to trigger rerender
+      this.setState({members: this.memberArray}, () => {console.log(this.memberArray)})
+
+      return this.memberArray
     }
 
-// this function sets what list of members we see: either the original array of members
-// sent by props, or the sorted list. This is determined by the value of the sort variable.
-
-    this.setArray =() => {
-      // if the sort button was not clicked, then listMembers has the original list
-      // of members sent by props
-      if (sort === false) {
-        listMembers = this.props.members
-        return listMembers
-      }
-      // if sort is true, then use the value of listMembers that was set in the sort function
-      else {
-        return listMembers
-      }
-    }
-
-    // variable holds whichever array was determined in function setArray
-    //this is what is used for the map function on line 97.
-    let memberArray = this.setArray();
+    // run this to give memberArray an initial value
+   this.initialize();
 
     return(
+
 
       <div className="members-container">
         <div className="App-header"><h1>Yearbook Members</h1></div>
         <MemberForm />
         <button className="form-button" onClick={this.handleSort}>Sort by Likes</button>
         
-        {memberArray.map(member => <Member key={member.id} member={member} destroyMember={this.props.destroyMember} 
+        {this.memberArray.map(member => <Member key={member.id} member={member} destroyMember={this.props.destroyMember} 
           prePopulate={ this.props.prePopulate } handleUpdate = {this.handleUpdate} handleSort={this.handleSort}
           />)} 
 
